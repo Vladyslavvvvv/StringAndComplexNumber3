@@ -163,8 +163,11 @@ namespace StringAndComplexNumber3
                 // Get the selected element
                 string selectedValue = listBoxElements.SelectedItem.ToString();
 
-                // Display information about the selected element in labelDisplayInfo
-                labelDIsplayInfo.Text = "Information about the selected item: " + selectedValue;
+                // Get the index (ordinal position) of the selected item
+                int selectedIndex = listBoxElements.SelectedIndex;
+
+                // Display information about the selected element and its ordinal position in labelDisplayInfo
+                labelDIsplayInfo.Text = "Item at position " + (selectedIndex + 1) + ": " + selectedValue;
             }
         }
     }
