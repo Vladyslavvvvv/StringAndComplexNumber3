@@ -122,49 +122,49 @@ namespace StringAndComplexNumber3
 
         private void buttonAddNew_Click(object sender, EventArgs e)
         {
-            // Отримуємо текст з textBoxAdd
+            // Get the text from textBoxAdd
             string newItem = textBoxAdd.Text;
 
-            // Перевіряємо, чи введено значення
+            // Check whether the value is entered
             if (!string.IsNullOrWhiteSpace(newItem))
             {
-                // Перевіряємо, чи введене значення є коректним комплексним числом
+                // Check whether the entered value is a correct complex number
                 if (!IsValidComplexNumber(newItem))
                 {
-                    // Відображаємо повідомлення про неправильне значення у labelAdded
-                    labelAdded.Text = "Введено неправильне комплексне число!";
+                    // Display a message about an incorrect value in labelAdded
+                    labelAdded.Text = "An incorrect complex number was entered!";
                     return;
                 }
 
-                // Додаємо новий елемент до колекції
+                // Add a new item to the collection
                 collection.Add(newItem);
 
-                // Оновлюємо listBoxElements, щоб відобразити новий елемент
+                // Update listBoxElements to display the new element
                 listBoxElements.Items.Add(newItem);
 
-                // Відображаємо повідомлення про успішне додавання
-                labelAdded.Text = "Додано новий елемент: " + newItem;
+                // Display a message about the successful addition
+                labelAdded.Text = "Added a new item: " + newItem;
 
-                // Очищаємо текстове поле textBoxAdd для введення наступного елемента
+                // Clear the textBoxAdd text field to enter the next element
                 textBoxAdd.Clear();
             }
             else
             {
-                // Повідомляємо користувача про недопустимий ввід
-                MessageBox.Show("Введіть значення для додавання до колекції!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Inform the user about invalid input
+                MessageBox.Show("Enter a value to add to the collection!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void listBoxElements_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Перевіряємо, чи вибрано елемент у listBoxElements
+            // Check whether an element is selected in listBoxElements
             if (listBoxElements.SelectedIndex != -1)
             {
-                // Отримуємо вибраний елемент
+                // Get the selected element
                 string selectedValue = listBoxElements.SelectedItem.ToString();
 
-                // Відображаємо інформацію про вибраний елемент у labelDisplayInfo
-                labelDIsplayInfo.Text = "Інформація про вибраний елемент: " + selectedValue;
+                // Display information about the selected element in labelDisplayInfo
+                labelDIsplayInfo.Text = "Information about the selected item: " + selectedValue;
             }
         }
     }
@@ -342,31 +342,64 @@ namespace StringAndComplexNumber3
     {
         private Stack<T> items;
 
+        // Initializes a new instance of the ComplexCollection class.
         public ComplexCollection()
         {
             items = new Stack<T>();
         }
 
-        // Додати елемент у колекцію
+        // Adds an item to the collection.
         public void Add(T item)
         {
             items.Push(item);
         }
 
-        // Перебір елементів колекції
+        // Returns an enumerator that iterates through the collection.
         public IEnumerator<T> GetEnumerator()
         {
             return items.GetEnumerator();
         }
 
-        // Перебір елементів колекції (необов'язковий метод)
+        // Returns an enumerator that iterates through the collection.
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
 
-        // Відображення інформації про певний елемент колекції
+        // Displays information about a specific item in the collection.
         public void DisplayItemInfo(T item)
+        {
+            MessageBox.Show(item.ToString(), "Item Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+    }
+
+    public class ComplexCollection1
+    {
+        private Stack items;
+
+        // Initializes a new instance of the ComplexCollection1 class.
+        public ComplexCollection1()
+        {
+            items = new Stack();
+        }
+
+        // Adds an item to the collection.
+        public void Add(object item)
+        {
+            items.Push(item);
+        }
+
+        // Returns an enumerable object that iterates through the collection.
+        public IEnumerable<object> GetItems()
+        {
+            foreach (object item in items)
+            {
+                yield return item;
+            }
+        }
+
+        // Displays information about a specific item in the collection.
+        public void DisplayItemInfo(object item)
         {
             MessageBox.Show(item.ToString(), "Item Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
