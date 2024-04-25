@@ -36,9 +36,11 @@
             this.labelEquals = new System.Windows.Forms.Label();
             this.labelAddition = new System.Windows.Forms.Label();
             this.labelMultiplication = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxAdd = new System.Windows.Forms.TextBox();
+            this.buttonAddNew = new System.Windows.Forms.Button();
+            this.labelAdded = new System.Windows.Forms.Label();
+            this.listBoxElements = new System.Windows.Forms.ListBox();
+            this.labelDIsplayInfo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonStart
@@ -119,44 +121,67 @@
             this.labelMultiplication.TabIndex = 7;
             this.labelMultiplication.Text = "Multiplication";
             // 
-            // label3
+            // textBoxAdd
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(300, 260);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(482, 20);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Examples of a complex number: 4 + 5i, -1 + -8i, -9 + -1i.";
+            this.textBoxAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxAdd.Location = new System.Drawing.Point(440, 210);
+            this.textBoxAdd.Name = "textBoxAdd";
+            this.textBoxAdd.Size = new System.Drawing.Size(100, 27);
+            this.textBoxAdd.TabIndex = 8;
             // 
-            // label4
+            // buttonAddNew
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(300, 230);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(462, 20);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "For example, the numbers 4 + -5i and 4+-5i are equal.";
+            this.buttonAddNew.AutoSize = true;
+            this.buttonAddNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAddNew.Location = new System.Drawing.Point(330, 210);
+            this.buttonAddNew.Name = "buttonAddNew";
+            this.buttonAddNew.Size = new System.Drawing.Size(90, 30);
+            this.buttonAddNew.TabIndex = 9;
+            this.buttonAddNew.Text = "Add new";
+            this.buttonAddNew.UseVisualStyleBackColor = true;
+            this.buttonAddNew.Click += new System.EventHandler(this.buttonAddNew_Click);
             // 
-            // label5
+            // labelAdded
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(300, 200);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(718, 20);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "The program may not compare numbers correctly due to different number of spaces.";
+            this.labelAdded.AutoSize = true;
+            this.labelAdded.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelAdded.Location = new System.Drawing.Point(546, 217);
+            this.labelAdded.Name = "labelAdded";
+            this.labelAdded.Size = new System.Drawing.Size(71, 20);
+            this.labelAdded.TabIndex = 10;
+            this.labelAdded.Text = "Added?";
+            // 
+            // listBoxElements
+            // 
+            this.listBoxElements.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listBoxElements.FormattingEnabled = true;
+            this.listBoxElements.ItemHeight = 20;
+            this.listBoxElements.Location = new System.Drawing.Point(330, 290);
+            this.listBoxElements.Name = "listBoxElements";
+            this.listBoxElements.Size = new System.Drawing.Size(160, 144);
+            this.listBoxElements.TabIndex = 11;
+            this.listBoxElements.SelectedIndexChanged += new System.EventHandler(this.listBoxElements_SelectedIndexChanged);
+            // 
+            // labelDIsplayInfo
+            // 
+            this.labelDIsplayInfo.AutoSize = true;
+            this.labelDIsplayInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelDIsplayInfo.Location = new System.Drawing.Point(330, 260);
+            this.labelDIsplayInfo.Name = "labelDIsplayInfo";
+            this.labelDIsplayInfo.Size = new System.Drawing.Size(40, 20);
+            this.labelDIsplayInfo.TabIndex = 13;
+            this.labelDIsplayInfo.Text = "Info";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1022, 450);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.labelDIsplayInfo);
+            this.Controls.Add(this.listBoxElements);
+            this.Controls.Add(this.labelAdded);
+            this.Controls.Add(this.buttonAddNew);
+            this.Controls.Add(this.textBoxAdd);
             this.Controls.Add(this.labelMultiplication);
             this.Controls.Add(this.labelAddition);
             this.Controls.Add(this.labelEquals);
@@ -182,8 +207,10 @@
         private System.Windows.Forms.Label labelEquals;
         private System.Windows.Forms.Label labelAddition;
         private System.Windows.Forms.Label labelMultiplication;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxAdd;
+        private System.Windows.Forms.Button buttonAddNew;
+        private System.Windows.Forms.Label labelAdded;
+        private System.Windows.Forms.ListBox listBoxElements;
+        private System.Windows.Forms.Label labelDIsplayInfo;
     }
 }

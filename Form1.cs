@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -21,9 +23,11 @@ namespace StringAndComplexNumber3
     // Class representing the main form
     public partial class Form1 : Form
     {
+        private ComplexCollection<string> collection;
         public Form1()
         {
             InitializeComponent();
+            collection = new ComplexCollection<string>();
         }
 
         // Method to check the validity of a complex number input
@@ -113,6 +117,54 @@ namespace StringAndComplexNumber3
             catch (Exception ex)
             {
                 MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void buttonAddNew_Click(object sender, EventArgs e)
+        {
+            // Отримуємо текст з textBoxAdd
+            string newItem = textBoxAdd.Text;
+
+            // Перевіряємо, чи введено значення
+            if (!string.IsNullOrWhiteSpace(newItem))
+            {
+                // Перевіряємо, чи введене значення є коректним комплексним числом
+                if (!IsValidComplexNumber(newItem))
+                {
+                    // Відображаємо повідомлення про неправильне значення у labelAdded
+                    labelAdded.Text = "Введено неправильне комплексне число!";
+                    return;
+                }
+
+                // Додаємо новий елемент до колекції
+                collection.Add(newItem);
+
+                // Оновлюємо listBoxElements, щоб відобразити новий елемент
+                listBoxElements.Items.Add(newItem);
+
+                // Відображаємо повідомлення про успішне додавання
+                labelAdded.Text = "Додано новий елемент: " + newItem;
+
+                // Очищаємо текстове поле textBoxAdd для введення наступного елемента
+                textBoxAdd.Clear();
+            }
+            else
+            {
+                // Повідомляємо користувача про недопустимий ввід
+                MessageBox.Show("Введіть значення для додавання до колекції!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void listBoxElements_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Перевіряємо, чи вибрано елемент у listBoxElements
+            if (listBoxElements.SelectedIndex != -1)
+            {
+                // Отримуємо вибраний елемент
+                string selectedValue = listBoxElements.SelectedItem.ToString();
+
+                // Відображаємо інформацію про вибраний елемент у labelDisplayInfo
+                labelDIsplayInfo.Text = "Інформація про вибраний елемент: " + selectedValue;
             }
         }
     }
@@ -283,6 +335,40 @@ namespace StringAndComplexNumber3
         public object Clone()
         {
             return this.MemberwiseClone();
+        }
+    }
+
+    public class ComplexCollection<T> : IEnumerable<T>
+    {
+        private Stack<T> items;
+
+        public ComplexCollection()
+        {
+            items = new Stack<T>();
+        }
+
+        // Додати елемент у колекцію
+        public void Add(T item)
+        {
+            items.Push(item);
+        }
+
+        // Перебір елементів колекції
+        public IEnumerator<T> GetEnumerator()
+        {
+            return items.GetEnumerator();
+        }
+
+        // Перебір елементів колекції (необов'язковий метод)
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        // Відображення інформації про певний елемент колекції
+        public void DisplayItemInfo(T item)
+        {
+            MessageBox.Show(item.ToString(), "Item Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
